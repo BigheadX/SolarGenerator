@@ -1,6 +1,9 @@
 package com.graduationproject.bigheadl.solargenerator;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Camera;
@@ -18,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,18 +46,7 @@ public class SolarGenerator extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
-
-
+        
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -139,13 +132,20 @@ public class SolarGenerator extends AppCompatActivity
             Intent intent = new Intent(SolarGenerator.this, CaptureActivity.class);
             startActivityForResult(intent, REQUEST_CODE);
         }
+    }
 
-        TextView content = (TextView) findViewById(R.id.content);
-        content.setVisibility(View.VISIBLE);
-
+    public void clear(View v){
         TextView content2 = (TextView) findViewById(R.id.content2);
-        content2.setVisibility(View.VISIBLE);
+        content2.setText("");
+    }
 
+    public void copy(View v){
+        ClipboardManager clip = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+        EditText content2 = (EditText) findViewById(R.id.content2);
+        clip.setText(content2.getText());
+
+        Snackbar.make(v, "Barcode Content has been copied to clipboard.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
     }
 
 
@@ -173,7 +173,9 @@ public class SolarGenerator extends AppCompatActivity
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString("qr_scan_result");
             //将扫描出的信息显示出来
-            TextView content = (TextView) findViewById(R.id.content2);
+
+            EditText content = (EditText) findViewById(R.id.content2);
+            //content.setVisibility(View.VISIBLE);
             content.setText(scanResult);
         }
     }

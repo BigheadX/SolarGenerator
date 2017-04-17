@@ -8,44 +8,67 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.graduationproject.bigheadl.solargenerator.SolarGenerator"
     tools:showIn="@layout/app_bar_solar_generator">
+
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="1dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/hw"
             android:layout_width="122dp"
             android:layout_height="wrap_content"
-            android:text="@string/hw"
+            android:layout_marginTop="10dp"
 
-            android:layout_marginTop="10dp" />
+            android:text="@string/hw" />
 
         <Button
             android:id="@+id/scannerbtn"
-            android:text="@string/scanner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:onClick="scanner"
-            android:layout_marginTop="10dp" />
+            android:text="@string/scanner" />
 
         <TextView
             android:id="@+id/content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="@string/content"
-            android:visibility="invisible" />
+            android:layout_marginTop="10dp"
+            android:text="@string/content" />
 
-        <TextView
+        <EditText
             android:id="@+id/content2"
-            android:layout_width="wrap_content"
+            android:editable="false"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text=" "
-            android:visibility="invisible" />
+            android:text=""
+             />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/copybtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="1dp"
+            android:onClick="copy"
+            android:text="Copy" />
+
+        <Button
+            android:id="@+id/clearbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:onClick="clear"
+            android:text="Clear" />
+    </LinearLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
