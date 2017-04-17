@@ -21,12 +21,19 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.activity.CaptureActivity;
+
 
 public class SolarGenerator extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int CAMERA_PERMISSION = 1;
     private Class<?> mClss;
+
+    //打开扫描界面请求码
+    private int REQUEST_CODE = 0x01;
+    //扫描成功返回码
+    private int RESULT_OK = 0xA1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,11 +122,6 @@ public class SolarGenerator extends AppCompatActivity
         return true;
     }
 
-    public void opencamera(View v){
-        Intent intent = new Intent(this,CameraActivity.class);
-        startActivity(intent);
-
-    }
 
     public void login(View v){
         Intent intent = new Intent(this,LoginActivity.class);
@@ -127,23 +129,26 @@ public class SolarGenerator extends AppCompatActivity
     }
 
     public void scanner(View v){
+        //打开二维码扫描界面
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-            mClss = CameraActivity.class;
+            mClss = CaptureActivity.class;
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
         } else {
-            Intent intent = new Intent(this, CameraActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(SolarGenerator.this, CaptureActivity.class);
+            startActivityForResult(intent, REQUEST_CODE);
         }
-
-        TextView type = (TextView) findViewById(R.id.type);
-        type.setVisibility(View.VISIBLE);
 
         TextView content = (TextView) findViewById(R.id.content);
         content.setVisibility(View.VISIBLE);
 
+        TextView content2 = (TextView) findViewById(R.id.content2);
+        content2.setVisibility(View.VISIBLE);
+
     }
+
+
 
     public void onRequestPermissionsResult(int requestCode,  String permissions[], int[] grantResults) {
         switch (requestCode) {
@@ -160,6 +165,18 @@ public class SolarGenerator extends AppCompatActivity
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //扫描结果回调
+        if (resultCode == RESULT_OK) { //RESULT_OK = -1
+            Bundle bundle = data.getExtras();
+            String scanResult = bundle.getString("qr_scan_result");
+            //将扫描出的信息显示出来
+            TextView content = (TextView) findViewById(R.id.content2);
+            content.setText(scanResult);
+        }
+    }
 
 
 

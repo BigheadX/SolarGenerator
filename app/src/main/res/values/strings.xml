@@ -10,7 +10,6 @@
     <string name="scanner">Decode barcode</string>
     <string name="title_activity_test">Test</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="type">Code Type:</string>
     <string name="content">Code Content:</string>
 
     <!-- Strings related to login -->
@@ -26,4 +25,9 @@
         completions."
     </string>
     <string name="title_activity_bug_report">BugReport</string>
+
+    <string name="encode_qrcode">生成二维码</string>
+    <string name="dencode_qrcode">扫描二维码</string>
+    <string name="code_text">请输入生成二维码的文本信息</string>
+    <string name="qrcodetext">这里显示扫描结果</string>
 </resources>
