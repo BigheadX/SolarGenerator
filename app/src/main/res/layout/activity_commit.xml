@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_commit"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/user"
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="Username:" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/devices"
+                android:layout_width="97dp"
+                android:layout_height="wrap_content"
+                android:text="Devices Model:" />
+
+            <EditText
+                android:id="@+id/devicesmodel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <ImageView
+                android:id="@+id/scan"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
+                android:onClick="scanner"
+                app:srcCompat="@drawable/scan" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/rep"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="Report:" />
+
+        <EditText
+            android:id="@+id/commit"
+            android:layout_width="match_parent"
+            android:layout_height="102dp"
+            android:layout_weight="0.09"
+            android:ems="10"
+            android:gravity="top|left"
+            android:inputType="text|textMultiLine"
+            android:minLines="6" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/t"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="8dp"
+                android:text="Add Attach:" />
+
+            <ImageView
+                android:id="@+id/camera"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_menu_camera"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/t"
+                android:layout_marginLeft="20dp" />
+
+            <ImageView
+                android:id="@+id/gallery"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/camera"
+                android:layout_marginLeft="10dp"
+                app:srcCompat="@drawable/ic_menu_gallery" />
+
+            <ImageView
+                android:id="@+id/recording"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_mic_black_48dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/gallery" />
+
+            <ImageView
+                android:id="@+id/video"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignBottom="@+id/recording"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/recording"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                app:srcCompat="@drawable/ic_videocam_black_48dp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="Rating:" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:numStars="5" />
+    </LinearLayout>
+
+
+</LinearLayout>

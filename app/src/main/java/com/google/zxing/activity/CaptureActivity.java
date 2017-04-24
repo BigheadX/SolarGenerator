@@ -24,6 +24,7 @@ import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
@@ -83,7 +84,7 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
         //ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_content);
-        back = (ImageView) findViewById(R.id.scanner_toolbar_back);
+        back = (ImageView) findViewById(R.id.toolbar_back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +95,8 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
 
+        TextView toolbar = (TextView) findViewById(R.id.toolbar_title);
+        toolbar.setText("Barcode/QRcode");
         //添加toolbar
 //        addToolbar();
     }

@@ -13,17 +13,39 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class BugReport extends AppCompatActivity {
+
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bug_report);
 
+        back = (ImageView) findViewById(R.id.toolbar_back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
+        TextView toolbar = (TextView) findViewById(R.id.toolbar_title);
+        toolbar.setText("BugReport");
+
+
+    }
+
+    public void addcommit(View v){
+        Intent intent = new Intent(this,commit.class);
+        startActivity(intent);
 
     }
 
 
 }
+
+

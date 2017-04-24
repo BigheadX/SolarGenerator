@@ -7,7 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="hw">Hello world!</string>
     <string name="camera_test">This is a camera.</string>
-    <string name="scanner">Decode barcode</string>
+    <string name="scanner">Scan Code</string>
     <string name="title_activity_test">Test</string>
     <string name="title_activity_login">Sign in</string>
     <string name="content">Code Content:</string>
