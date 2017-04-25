@@ -144,8 +144,8 @@ public class SolarGenerator extends AppCompatActivity
         EditText content2 = (EditText) findViewById(R.id.content2);
         clip.setText(content2.getText());
 
-        Snackbar.make(v, "Barcode Content has been copied to clipboard.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        Toast.makeText(this, "Barcode Content has been copied to clipboard.", Toast.LENGTH_SHORT).show();
+
     }
 
 

@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
         android:weightSum="1">
@@ -19,25 +19,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/user"
-                android:layout_width="72dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:text="Username:" />
-
             <EditText
                 android:id="@+id/username"
                 android:layout_width="104dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/devices"
-                android:layout_width="97dp"
-                android:layout_height="wrap_content"
-                android:text="Devices Model:" />
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:layout_weight="3.05" />
 
             <EditText
                 android:id="@+id/devicesmodel"
@@ -45,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:hint="Device Model"
                 android:inputType="textPersonName" />
 
             <ImageView
@@ -56,20 +46,23 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/rep"
+        <EditText
+            android:id="@+id/capital"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:text="Report:" />
+            android:layout_height="41dp"
+            android:ems="10"
+            android:hint="Capital"
+            android:inputType="text"
+            android:singleLine="true" />
 
         <EditText
             android:id="@+id/commit"
             android:layout_width="match_parent"
             android:layout_height="102dp"
-            android:layout_weight="0.09"
+            android:layout_weight="0.84"
             android:ems="10"
             android:gravity="top|left"
+            android:hint="Report"
             android:inputType="text|textMultiLine"
             android:minLines="6" />
 
@@ -91,31 +84,34 @@
                 android:id="@+id/camera"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_menu_camera"
                 android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/t"
-                android:layout_marginLeft="20dp" />
+                android:layout_weight="1"
+                android:onClick="camera"
+                app:srcCompat="@drawable/ic_menu_camera" />
 
             <ImageView
                 android:id="@+id/gallery"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_weight="1"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@id/camera"
                 android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/camera"
+                android:layout_weight="1"
+                android:onClick="gallery"
                 app:srcCompat="@drawable/ic_menu_gallery" />
 
             <ImageView
                 android:id="@+id/recording"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_mic_black_48dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/gallery" />
+                android:layout_toRightOf="@id/gallery"
+                android:layout_weight="1"
+                android:onClick="recording"
+                app:srcCompat="@drawable/ic_mic_black_48dp" />
 
             <ImageView
                 android:id="@+id/video"
@@ -123,12 +119,39 @@
                 android:layout_height="36dp"
                 android:layout_alignBottom="@+id/recording"
                 android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/recording"
                 android:layout_weight="1"
-                android:layout_marginLeft="10dp"
+                android:onClick="video"
                 app:srcCompat="@drawable/ic_videocam_black_48dp" />
 
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/recordreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="touchtoplay"
+            android:text=" "
+            android:textColor="@android:color/holo_blue_light" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/captured"
+                android:layout_width="211dp"
+                android:layout_height="172dp"
+                app:srcCompat="@drawable/ic_add_48pt" />
+
+            <VideoView
+                android:id="@+id/videoView"
+                android:layout_width="198dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/rating"
@@ -143,6 +166,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:numStars="5" />
+
     </LinearLayout>
 
 

@@ -25,7 +25,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:onClick="addcommit"
-        app:backgroundTint="@color/colorAccent"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        app:backgroundTint="@android:color/holo_blue_bright"
+        app:srcCompat="@drawable/ic_add_48pt" />
 
 </android.support.design.widget.CoordinatorLayout>
