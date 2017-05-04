@@ -10,21 +10,27 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class AccountSQLite extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "UserList";
+    private static final String DB_NAME = "Report";
     private static final int DB_VERSION = 1;
-    private static final String TABLE_NAME = "User";
-    private static final String COL_id = "id";
-    private static final String COL_email = "email";
-    private static final String COL_password = "password";
-    private static final String COL_identify = "identify";
+    private static final String TABLE_NAME = "Report";
+    private static final String COL_id = "reportID";
+    private static final String COL_username = "username";
+    private static final String COL_content = "content";
+    private static final String COL_enablePicture = "enablePicture";
+    private static final String COL_picture = "picture";
+    private static final String COL_enableAudio = "enableAudio";
+    private static final String COL_audio = "audio";
+    private static final String COL_enableVideo = "enableVideo";
+    private static final String COL_video = "video";
+    private static final String COL_isSync = "isSync";
+    private static final String COL_date = "date";
 
     private static final String TABLE_CREATE = "CREATE TABLE" + TABLE_NAME + "(" +
-            COL_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_email + " TEXT NOT NULL, " +
-            COL_password + " TEXT NOT NULL, " + COL_identify + " TEXT NOT NULL ); ";
-
-    public AccountSQLite(Context context){
-        super(context, DB_NAME, null, DB_VERSION);
-    }
+            COL_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_username + " TEXT NOT NULL , " +
+            COL_content + " TEXT NOT NULL, " + COL_enablePicture + " INTEGER, " + COL_picture +
+            " BLOB, " + COL_enableAudio + " INTEGER, " + COL_audio + " BLOB, " + COL_enableVideo +
+            " INTEGER, " + COL_video + " BLOB, " + COL_isSync + " INTEGER, " + COL_date +
+            " TEXT NOT NULL ); ";
 
     @Override
     public void onCreate(SQLiteDatabase db){
@@ -38,5 +44,8 @@ public class AccountSQLite extends SQLiteOpenHelper {
     }
 
 
+    public AccountSQLite(Context context){
+        super(context, DB_NAME, null, DB_VERSION);
+    }
 
 }

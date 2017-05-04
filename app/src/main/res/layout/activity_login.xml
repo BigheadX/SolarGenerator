@@ -41,8 +41,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -59,34 +58,35 @@
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/Rdbtngrp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="3dp">
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
+                    android:layout_marginLeft="10dp"
                     android:checked="true"
                     android:text="user" />
 
                 <RadioButton
+                    android:id="@+id/admin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/admin"
-                    android:text="admin"
-                    android:layout_marginLeft="50dp"/>
+                    android:layout_marginLeft="50dp"
+                    android:text="admin" />
+
+            </RadioGroup>
 
 
-            </LinearLayout>
+
 
             <Button
                 android:id="@+id/email_sign_in_button"

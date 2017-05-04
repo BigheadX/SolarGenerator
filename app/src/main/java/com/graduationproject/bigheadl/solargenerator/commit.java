@@ -13,7 +13,7 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.media.session.MediaController;
+import android.widget.MediaController;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -41,6 +41,8 @@ import android.widget.VideoView;
 import com.google.zxing.activity.CaptureActivity;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -49,19 +51,21 @@ import static android.support.design.R.id.visible;
 public class commit extends AppCompatActivity {
 
     private ImageView back;
+    private ImageView image;
     private File file;
     private boolean isRecording = false;
     private static final int CAMERA_PERMISSION = 1;
     private static final int RECORD_PERMISSION = 2;
     private static final int CAPTURE_PICTURES = 3;
     private static final int CAPTURE_VIDEOS = 4;
+    private static final int PHOTO_REQUEST_GALLERY = 5;
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 29;
     private Class<?> mClss;
 
     //打开扫描界面请求码
-    private int REQUEST_CODE = 0x01;
+    private static final int REQUEST_CODE = 0x01;
     //扫描成功返回码
-    private int RESULT_OK = 0xA1;
+
 
 
     private final static String TAG = "Test";
@@ -69,6 +73,9 @@ public class commit extends AppCompatActivity {
     private MediaPlayer mediaPlayer;
     private static String filename = "record.3gp";
     private String path;
+    private String picturePath;
+    private String videoPath;
+    private String audioPath;
 
 
     @Override
@@ -87,11 +94,24 @@ public class commit extends AppCompatActivity {
             }
         });
 
+
+
+    }
+
+    public static Bitmap getLoacalBitmap(String url) {
+        try {
+            FileInputStream fis = new FileInputStream(url);
+            return BitmapFactory.decodeStream(fis);  ///把流转化为Bitmap图片
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void send(View v){
         RatingBar rating = (RatingBar) findViewById(R.id.ratingBar);
-        if(rating.getNumStars()==0)
+        if(rating.getRating()==0)
             Toast.makeText(this, "Please rate this serve.", Toast.LENGTH_SHORT).show();
 
             //upload to database;
@@ -151,34 +171,55 @@ public class commit extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap picture;
+        ImageView image;
         //扫描结果回调
-        if (resultCode == RESULT_OK) { //RESULT_OK = -1
-            switch(requestCode) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
                 case CAPTURE_PICTURES:
                     picture = (Bitmap) data.getExtras().get("data");
-                    ImageView image = (ImageView) findViewById(R.id.captured);
+                    //picture = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+"/image.jpg");
+                    //picturePath = Environment.getExternalStorageDirectory()+"/image.jpg";
+                    image = (ImageView) findViewById(R.id.captured);
                     image.setImageBitmap(picture);
                     break;
                 case CAPTURE_VIDEOS:
                     Uri uri = data.getData();
-                    EditText text = (EditText)findViewById(R.id.commit);
+                    EditText text = (EditText) findViewById(R.id.commit);
                     text.setText(getRealPathFromUri(uri));
+                    MediaController mediaController = new MediaController(this);
                     VideoView video = (VideoView) findViewById(R.id.videoView);
+                    video.setMediaController(mediaController);
                     video.setVideoURI(uri);
                     video.start();
                     break;
-                default:
-                    Bundle bundle = data.getExtras();
-                    String scanResult = bundle.getString("qr_scan_result");
-                    //将扫描出的信息显示出来
+                case PHOTO_REQUEST_GALLERY:
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
-                    EditText content = (EditText) findViewById(R.id.devicesmodel);
-                    //content.setVisibility(View.VISIBLE);
-                    content.setText(scanResult);
+                    Cursor cursor = getContentResolver().query(selectedImage,
+                            filePathColumn, null, null, null);
+                    if (cursor.moveToFirst()) {
+                        String picturePath = cursor.getString(0);
+                        cursor.close();
+                        image = (ImageView) findViewById(R.id.captured);
+                        image.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+                    }
+
                     break;
             }
         }
+        if(requestCode == REQUEST_CODE) {
+            Bundle bundle = data.getExtras();
+            String scanResult = bundle.getString("qr_scan_result");
+            //将扫描出的信息显示出来
+
+            EditText content = (EditText) findViewById(R.id.devicesmodel);
+            //content.setVisibility(View.VISIBLE);
+            content.setText(scanResult);
+        }
     }
+
+
 
     private String getRealPathFromUri(Uri uri){
         String[] columns = {MediaStore.Images.Media.DATA};
@@ -202,10 +243,10 @@ public class commit extends AppCompatActivity {
     }
 
     public void callcamera(){
+
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        //file = new File(file,"picture.jpg");
-        //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        //Uri imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),"image.jpg"));
+        //intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         if(isIntentAvialable(this, intent)){
             startActivityForResult(intent, CAPTURE_PICTURES);
         } else {
@@ -220,7 +261,10 @@ public class commit extends AppCompatActivity {
     }
 
     public void gallery(View v){
-
+        // 激活系统图库，选择一张图片
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_GALLERY
+        startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
     }
 
     public void recording(View v){

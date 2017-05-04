@@ -23,10 +23,10 @@
                 android:id="@+id/username"
                 android:layout_width="104dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="3.05"
                 android:ems="10"
                 android:hint="Username"
-                android:inputType="textPersonName"
-                android:layout_weight="3.05" />
+                android:inputType="textPersonName" />
 
             <EditText
                 android:id="@+id/devicesmodel"

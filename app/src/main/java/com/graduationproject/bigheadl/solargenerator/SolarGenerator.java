@@ -104,10 +104,6 @@ public class SolarGenerator extends AppCompatActivity
         } else if (id == R.id.nav_bugreport) {
             Intent intent = new Intent(this, BugReport.class);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
